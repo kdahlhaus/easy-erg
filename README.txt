@@ -1,4 +1,5 @@
 easy_erg - a C++ Wrapper for the Concept II Rowing Machine Interface
+(C) Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
 This package contains a library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit).  This library was developed against version 1.24 of the API.
 
