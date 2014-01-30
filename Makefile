@@ -53,20 +53,20 @@ demo/%.exe: demo/%.o build/libEasyErg.a
 build_dir:  
 	@mkdir -p $(BUILD)
 
-c2libs: build_dir demo/libRPPM3DDI.a demo/libRPPM3CSAFE.a demo/libRPPM3USB.a c2inis
+c2libs: build_dir $(BUILD)/libRPPM3DDI.a $(BUILD)/libRPPM3CSAFE.a $(BUILD)/libRPPM3USB.a c2inis
 
 
-demo/libRPPM3DDI.a:  demo/RPPM3DDI.DLL
-	$(PEXPORTS) $(C2LIBDIR)/RPPM3DDI.DLL > demo/RPPM3DDI.def
-	$(DLLTOOL) --dllname RPPM3DDI.dll --def demo/RPPM3DDI.def --output-lib demo/libRPPM3DDI.a
+$(BUILD)/libRPPM3DDI.a:  demo/RPPM3DDI.DLL
+	$(PEXPORTS) $(C2LIBDIR)/RPPM3DDI.DLL > $(BUILD)/RPPM3DDI.def
+	$(DLLTOOL) --dllname RPPM3DDI.dll --def $(BUILD)/RPPM3DDI.def --output-lib $(BUILD)/libRPPM3DDI.a
 
-demo/libRPPM3USB.a:  demo/RPPM3USB.DLL
-	$(PEXPORTS) $(C2LIBDIR)/RPPM3USB.DLL > demo/RPPM3USB.def
-	$(DLLTOOL) --dllname RPPM3USB.dll --def demo/RPPM3USB.def --output-lib demo/libRPPM3USB.a
+$(BUILD)/libRPPM3USB.a:  demo/RPPM3USB.DLL
+	$(PEXPORTS) $(C2LIBDIR)/RPPM3USB.DLL > $(BUILD)/RPPM3USB.def
+	$(DLLTOOL) --dllname RPPM3USB.dll --def $(BUILD)/RPPM3USB.def --output-lib $(BUILD)/libRPPM3USB.a
 
-demo/libRPPM3CSAFE.a:  demo/RPPM3CSAFE.DLL
-	$(PEXPORTS) -o $(C2LIBDIR)/RPPM3CSAFE.DLL > demo/RPPM3CSAFE.def
-	$(DLLTOOL) --dllname RPPM3CSAFE.dll --def demo/RPPM3CSAFE.def --output-lib demo/libRPPM3CSAFE.a
+$(BUILD)/libRPPM3CSAFE.a:  demo/RPPM3CSAFE.DLL
+	$(PEXPORTS) -o $(C2LIBDIR)/RPPM3CSAFE.DLL > $(BUILD)/RPPM3CSAFE.def
+	$(DLLTOOL) --dllname RPPM3CSAFE.dll --def $(BUILD)/RPPM3CSAFE.def --output-lib $(BUILD)/libRPPM3CSAFE.a
 
 demo/%.DLL:  
 	cp $(C2LIBDIR)/$*.DLL demo

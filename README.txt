@@ -20,3 +20,10 @@ PREREQS:
 3. connect a Concept 2 ergometer via USB
 4. cd to build
 5. demo.exe
+
+
+Using in your own code:
+    The command line would be something like this:
+        g++ -mno-cygwin -I../easy_erg/build -I../easy_erg/lib/sdk/PC -L../easy_erg/build  my_app.cpp -lEasyErg -lRPPM3USB -lRPPM3DDI
+    
+    You also have to copy the DLL's and INI files from the demo directory to the directory containing the my_app executable.0

@@ -2,3 +2,6 @@ lib/sdk/PC
 build
 src/*.o
 demo/*.o
+demo/*.exe
+demo/RPPM3*.DLL
+demo/RP*.ini
