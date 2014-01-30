@@ -1,0 +1,13 @@
+LIBRARY RPPM3Csafe.dll
+EXPORTS
+tkcmdsetCSAFE_command   	@1
+tkcmdsetCSAFE_get_cmd_data_types	@2
+tkcmdsetCSAFE_get_cmd_name	@3
+tkcmdsetCSAFE_get_cmd_text	@4
+tkcmdsetCSAFE_get_dll_version	@5
+tkcmdsetCSAFE_get_error_name	@6
+tkcmdsetCSAFE_get_error_text	@7
+tkcmdsetCSAFE_get_status	@8
+tkcmdsetCSAFE_init_protocol	@9
+tkcmdsetCSAFE_read_logblk8	@10
+tkcmdsetCSAFE_write_logblk16	@11
