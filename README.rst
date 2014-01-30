@@ -1,7 +1,6 @@
 easy_erg - a C++ Wrapper for the Concept II Rowing Machine Interface
 ====================================================================
-
-(C) Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
+Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
 Overview
 --------
@@ -19,10 +18,10 @@ Building and running the demo programs
 
 PREREQS
 .......
-    # version 1.24 of the Concept 2 Software Development Kit
-    # cygwin with G++
-    # dlltool installed
-    # pexports installed
+#. version 1.24 of the Concept 2 Software Development Kit
+#. cygwin with G++
+#. dlltool installed
+#. pexports installed
 
 Steps
 .....
@@ -35,8 +34,8 @@ Steps
 
 Using in your own code
 ----------------------
-    The command line would be something like this:
+The command line would be something like this:
 
     g++ -mno-cygwin -I../easy_erg/build -I../easy_erg/lib/sdk/PC -L../easy_erg/build  my_app.cpp -lEasyErg -lRPPM3USB -lRPPM3DDI
     
-    You also have to copy the DLL's and INI files from the demo directory to the directory containing the my_app executable.0
+You also have to copy the DLL's and INI files from the demo directory to the directory containing the my_app executable.0
