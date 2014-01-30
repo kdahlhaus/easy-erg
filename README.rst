@@ -18,14 +18,14 @@ Building and running the demo programs
 
 PREREQS
 .......
-#. version 1.24 of the Concept 2 Software Development Kit
-#. cygwin with G++
-#. dlltool installed
-#. pexports installed
+1. version 1.24 of the Concept 2 Software Development Kit
+2. cygwin with g++ 
+3. dlltool installed
+4. pexports installed
 
 Steps
 .....
-1. Extract the concept 2 API libraries to lib/SDK. The DLL's should be in lib/SDK/PC.
+1. Extract the concept 2 API libraries to lib/sdk. The DLL's should be in lib/sdk/PC.
 2. run "make"
 3. connect a Concept 2 ergometer via USB
 4. cd to build
