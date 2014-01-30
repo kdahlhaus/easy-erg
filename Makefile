@@ -22,7 +22,7 @@ all:  build_dir c2libs demos
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD) src/*.o demo/*.o
+	rm -rf $(BUILD) src/*.o demo/*.o demo/*.ini demo/*.DLL demo/*.exe demo/*.def demo/*.a
  
 COMMON_OBJECTS = src/Pm3Erg.o src/ErgNet.o src/CSafeDll.o src/CIIHeaders.o src/ErgState.o src/SlideRatio.o
 

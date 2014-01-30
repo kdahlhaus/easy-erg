@@ -1,1 +1,4 @@
 lib/sdk/PC
+build
+src/*.o
+demo/*.o
