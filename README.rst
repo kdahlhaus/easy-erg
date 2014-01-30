@@ -1,4 +1,4 @@
-easy_erg - a C++ Wrapper for the Concept II Rowing Machine Interface
+easy-erg - a C++ Wrapper for the Concept II Rowing Machine Interface
 ====================================================================
 Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
