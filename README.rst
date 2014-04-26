@@ -10,7 +10,7 @@ License
 -------
 This software is licensed under the GNU GPL.  Please see the file 'LICENSE' for details.  Note that this license requires any software using this library to make source code available. 
 
-Should you not wish to use the software under a different license, please contact Kevin Dahlhausen (kpd@powertwenty.com) to discuss alternative licensing.
+Should you not wish to use the software under the GPL license, please contact Kevin Dahlhausen (kpd@powertwenty.com) to discuss alternative licensing.
 
 
 Building and running the demo programs
