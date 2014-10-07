@@ -26,11 +26,20 @@ CSafeDll::CSafeDll()
        throw "Unable to initialize PM3CsafeCP.dll";
    }
 
+/*
    getDllVer=(pUint16Void)GetProcAddress(hdll, (const char *)5);
    csafeCommand=(pCommand)GetProcAddress(hdll, (const char *)1); 
    initProto=(pFunc16)GetProcAddress( hdll, (const char *)9); 
    errorName=(pErrorData)GetProcAddress( hdll, (const char *)6); 
    errorText=(pErrorData)GetProcAddress( hdll, (const char *)7); 
+   */
+
+   getDllVer=(pUint16Void)GetProcAddress(hdll, (const char *)6);
+   csafeCommand=(pCommand)GetProcAddress(hdll, (const char *)2); 
+   initProto=(pFunc16)GetProcAddress( hdll, (const char *)12); 
+   errorName=(pErrorData)GetProcAddress( hdll, (const char *)7); 
+   errorText=(pErrorData)GetProcAddress( hdll, (const char *)8);  
+
 }
 
 

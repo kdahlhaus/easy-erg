@@ -14,7 +14,7 @@ using namespace std;
 
 void onErgError( int errorCode, char *note, char *errorName, char *errorText)
 {
-    printf("onErgError called:\n%d\n%s\n%s\n%s\n", errorCode, note, errorName, errorText);
+    printf("onErgError called:\nerrorcode: %d\nnote: %s\nerror name: %s\nerror text: %s\n", errorCode, note, errorName, errorText);
     exit(1);
 }
 
