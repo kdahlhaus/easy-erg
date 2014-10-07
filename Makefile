@@ -64,6 +64,8 @@ $(BUILD)/libPM3USBCP.a:  demo/PM3USBCP.DLL
 	$(PEXPORTS) $(C2LIBDIR)/PM3USBCP.DLL > $(BUILD)/PM3USBCP.def
 	$(DLLTOOL) --dllname PM3USBCP.dll --def $(BUILD)/PM3USBCP.def --output-lib $(BUILD)/libPM3USBCP.a
 
+
+# NOTE:  CSafeDll.cpp loads the DLL dynamically, so if the DLL name changes it must be adjusted there as well
 $(BUILD)/libPM3CsafeCP.a:  demo/PM3CsafeCP.DLL
 	$(PEXPORTS) -o $(C2LIBDIR)/PM3CsafeCP.DLL > $(BUILD)/PM3CsafeCP.def
 	$(DLLTOOL) --dllname PM3CsafeCP.dll --def $(BUILD)/PM3CsafeCP.def --output-lib $(BUILD)/libPM3CsafeCP.a

@@ -20,10 +20,10 @@ EXPORTS
 
 CSafeDll::CSafeDll()
 {
-   hdll = LoadLibrary("RPPM3CSAFE.dll"); 
+   hdll = LoadLibrary("PM3CsafeCP.dll"); 
    if (!hdll)
    {
-       throw "Unable to initialize RPPM3Csafe.dll";
+       throw "Unable to initialize PM3CsafeCP.dll";
    }
 
    getDllVer=(pUint16Void)GetProcAddress(hdll, (const char *)5);
