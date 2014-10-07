@@ -6,9 +6,9 @@ extern "C"
 {
 #endif 
 
-#include "PM3DDI.h"
+#include "PM3DDICP.h"
 /* #include "PM3Csafe.h" */
-#include "PM3USB.h"
+#include "PM3USBCP.h"
 
 #ifdef __cplusplus
 }

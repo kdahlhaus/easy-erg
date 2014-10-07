@@ -12,7 +12,7 @@ CFLAGS      =-mno-cygwin
 SWIGFLAGS	=-strict 0 -c++ -shadow -dhtml
 INCLUDES    = -I$(C2INC) -Isrc
 LDFLAGS     = -L$(C2LIBDIR) -Lsrc -L$(BUILD)
-LIBS        = -lRPPM3DDI -lRPPM3USB 
+LIBS        = -lPM3DDICP -lPM3USBCP 
 
 BUILD       = build
 
@@ -53,26 +53,26 @@ demo/%.exe: demo/%.o build/libEasyErg.a
 build_dir:  
 	@mkdir -p $(BUILD)
 
-c2libs: build_dir $(BUILD)/libRPPM3DDI.a $(BUILD)/libRPPM3CSAFE.a $(BUILD)/libRPPM3USB.a c2inis
+c2libs: build_dir $(BUILD)/libPM3DDICP.a $(BUILD)/libPM3CsafeCP.a $(BUILD)/libPM3USBCP.a
 
 
-$(BUILD)/libRPPM3DDI.a:  demo/RPPM3DDI.DLL
-	$(PEXPORTS) $(C2LIBDIR)/RPPM3DDI.DLL > $(BUILD)/RPPM3DDI.def
-	$(DLLTOOL) --dllname RPPM3DDI.dll --def $(BUILD)/RPPM3DDI.def --output-lib $(BUILD)/libRPPM3DDI.a
+$(BUILD)/libPM3DDICP.a:  demo/PM3DDICP.DLL
+	$(PEXPORTS) $(C2LIBDIR)/PM3DDICP.DLL > $(BUILD)/PM3DDICP.def
+	$(DLLTOOL) --dllname PM3DDICP.dll --def $(BUILD)/PM3DDICP.def --output-lib $(BUILD)/libPM3DDICP.a
 
-$(BUILD)/libRPPM3USB.a:  demo/RPPM3USB.DLL
-	$(PEXPORTS) $(C2LIBDIR)/RPPM3USB.DLL > $(BUILD)/RPPM3USB.def
-	$(DLLTOOL) --dllname RPPM3USB.dll --def $(BUILD)/RPPM3USB.def --output-lib $(BUILD)/libRPPM3USB.a
+$(BUILD)/libPM3USBCP.a:  demo/PM3USBCP.DLL
+	$(PEXPORTS) $(C2LIBDIR)/PM3USBCP.DLL > $(BUILD)/PM3USBCP.def
+	$(DLLTOOL) --dllname PM3USBCP.dll --def $(BUILD)/PM3USBCP.def --output-lib $(BUILD)/libPM3USBCP.a
 
-$(BUILD)/libRPPM3CSAFE.a:  demo/RPPM3CSAFE.DLL
-	$(PEXPORTS) -o $(C2LIBDIR)/RPPM3CSAFE.DLL > $(BUILD)/RPPM3CSAFE.def
-	$(DLLTOOL) --dllname RPPM3CSAFE.dll --def $(BUILD)/RPPM3CSAFE.def --output-lib $(BUILD)/libRPPM3CSAFE.a
+$(BUILD)/libPM3CsafeCP.a:  demo/PM3CsafeCP.DLL
+	$(PEXPORTS) -o $(C2LIBDIR)/PM3CsafeCP.DLL > $(BUILD)/PM3CsafeCP.def
+	$(DLLTOOL) --dllname PM3CsafeCP.dll --def $(BUILD)/PM3CsafeCP.def --output-lib $(BUILD)/libPM3CsafeCP.a
 
 demo/%.DLL:  
 	cp $(C2LIBDIR)/$*.DLL demo
 	chmod 555 demo/$*.DLL
 
-c2inis: demo/RPecodesPM3DDI.ini demo/RPPM3CSAFE.ini 
+c2inis: demo/RPecodesPM3DDI.ini demo/PM3CsafeCP.ini 
 
 demo/%.ini:
 	cp $(C2LIBDIR)/$*.ini demo

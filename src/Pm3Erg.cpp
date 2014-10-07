@@ -388,7 +388,7 @@ const char *Pm3Erg::getFirmwareVersion()
 {
     ergNet.setForErgType(ergType);
     ERRCODE_T errorCode;
-    errorCode = tkcmdsetDDI_fw_version( unitAddress, (UINT8_T *)verPtr);
+    errorCode = tkcmdsetDDI_fw_version( unitAddress, (INT8_T *)verPtr, PM3_BUFFER_SIZE);
     if (errorCode)
     {
         logDdiError(errorCode, "error in getFwVersion");
@@ -400,7 +400,7 @@ const char *Pm3Erg::getSerialNumber()
 {
     ergNet.setForErgType(ergType);
     ERRCODE_T errorCode;
-    errorCode = tkcmdsetDDI_serial_number( unitAddress, (UINT8_T *)serialNum);
+    errorCode = tkcmdsetDDI_serial_number( unitAddress, (INT8_T *)serialNum, PM3_BUFFER_SIZE);
     if (errorCode)
     {
         logDdiError(errorCode, "error in get serial number");
