@@ -4,7 +4,7 @@ Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
 Overview
 --------
-This package contains a library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit).  This library was developed against version 1.24 of the API.
+This package contains a library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit).  This library runs against the (lastest as of writing) version of the API - the one with documents labeled version 0.14
 
 License
 -------
