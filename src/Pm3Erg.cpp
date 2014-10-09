@@ -216,7 +216,7 @@ unsigned long int Pm3Erg::getTargetDistance()
 void Pm3Erg::getTimeIntoThePiece(int *hours, int *mins, int *secs)
 {
     UINT32_T cmdData[]={ 0xA0 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getWork", 1,  cmdData, rspDataSize, rspData ) ;
 
@@ -235,7 +235,7 @@ unsigned long int Pm3Erg::getSecondsIntoThePiece()
 
 unsigned long int Pm3Erg::getDisplayedTime()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0xa0};
     doCsafeCommand( "getWorkTime", 3,  cmd, rspDataSize, rspData ) ;
@@ -250,7 +250,7 @@ unsigned long Pm3Erg::getDistanceRowedSoFar()
     // csafe version
     UINT16_T cmdSize=1;
     UINT32_T cmdData[]={ 0xa1 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getDistanceRowedSoFar", 1,  cmdData, rspDataSize, rspData ) ;
     unsigned long meters =  (rspData[3] << 8) + rspData[2];
@@ -262,7 +262,7 @@ int Pm3Erg::getAccumulatedCalories()
 {
     UINT16_T cmdSize=1;
     UINT32_T cmdData[]={ 0xa3 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getAccumulatedCalories", 1,  cmdData, rspDataSize, rspData ) ;
     int cals =  (rspData[3] << 8) + rspData[2];
@@ -274,7 +274,7 @@ int Pm3Erg::getAccumulatedCalories()
 unsigned long int Pm3Erg::getDisplayedMeters()
 {
     // pm3 specific
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0xa3};
     doCsafeCommand( "getDisplayedMeters", 3,  cmd, rspDataSize, rspData ) ;
@@ -289,7 +289,7 @@ void Pm3Erg::enableScreenErrorMode( int showErrors )
     log("enableScreenErrorMode(%d)", showErrors);
     Sleep(5000);
     int mode = showErrors ? 1 : 0;
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x02, 0x27, 0x01};
     cmd[4]=showErrors;
@@ -301,7 +301,7 @@ void Pm3Erg::enableScreenErrorMode( int showErrors )
 void Pm3Erg::setSplitDuration(unsigned short timeDistance, unsigned int duration)
 {
     log("setSplitDuration(%d,%d)", timeDistance, duration);
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x07, 0x05, 0x05, 0, 0,  0, 0, 0};
     cmd[4]=timeDistance;
@@ -322,7 +322,7 @@ void Pm3Erg::setSplitDuration(unsigned short timeDistance, unsigned int duration
 
 unsigned short Pm3Erg::getStrokeState()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0xBF};
     doCsafeCommand( "getStrokeState", 3,  cmd, rspDataSize, rspData ) ;
@@ -332,7 +332,7 @@ unsigned short Pm3Erg::getStrokeState()
 
 unsigned short Pm3Erg::getWorkoutState()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0x8D};
     doCsafeCommand( "getWorkoutState", 3,  cmd, rspDataSize, rspData ) ;
@@ -342,7 +342,7 @@ unsigned short Pm3Erg::getWorkoutState()
 
 unsigned short Pm3Erg::getWorkoutIntervalCount()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0x9F};
     doCsafeCommand( "getWorkoutIntervalCount", 3,  cmd, rspDataSize, rspData ) ;
@@ -352,7 +352,7 @@ unsigned short Pm3Erg::getWorkoutIntervalCount()
 
 unsigned short Pm3Erg::getWorkoutIntervalType()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0x8E};
     doCsafeCommand( "getWorkoutIntervalType", 3,  cmd, rspDataSize, rspData ) ;
@@ -362,7 +362,7 @@ unsigned short Pm3Erg::getWorkoutIntervalType()
 
 int Pm3Erg::getRestTime()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0xCF};
     doCsafeCommand( "getRestTime", 3,  cmd, rspDataSize, rspData ) ;
@@ -376,7 +376,7 @@ int Pm3Erg::getRestTime()
 
 unsigned short Pm3Erg::getDragFactor()
 {
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     UINT32_T cmd[]={0x1a, 0x01, 0xC1};
     doCsafeCommand( "getDragFactor", 3,  cmd, rspDataSize, rspData ) ;
@@ -413,7 +413,7 @@ const char *Pm3Erg::getSerialNumber()
 void Pm3Erg::goReady()
 {
     UINT32_T cmdData[]={ 0x87 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "goReady", 1,  cmdData, rspDataSize, rspData ) ;
 }
@@ -421,7 +421,7 @@ void Pm3Erg::goReady()
 void Pm3Erg::goIdle()
 {
     UINT32_T cmdData[]={ 0x82 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "goIdle", 1,  cmdData, rspDataSize, rspData ) ;
 }
@@ -429,7 +429,7 @@ void Pm3Erg::goIdle()
 void Pm3Erg::goInUse()
 {
     UINT32_T cmdData[]={ 0x85 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "goInUse", 1,  cmdData, rspDataSize, rspData ) ;
 }
@@ -437,7 +437,7 @@ void Pm3Erg::goInUse()
 void Pm3Erg::goFinished()
 {
     UINT32_T cmdData[]={ 0x86 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "goFinished", 1,  cmdData, rspDataSize, rspData ) ;
 }
@@ -456,7 +456,7 @@ unsigned short Pm3Erg::getWorkoutType()
     } 
     else
     {
-        UINT16_T rspDataSize;
+        UINT16_T rspDataSize=64;
         UINT32_T rspData[64];
         UINT32_T cmd[]={0x1a, 0x01, 0x89};
         doCsafeCommand( "getWorkoutType", 3,  cmd, rspDataSize, rspData ) ;
@@ -509,7 +509,7 @@ const char * Pm3Erg::getStrokeStateText()
 unsigned short Pm3Erg::getCadence()
 {
     UINT32_T cmdData[]={ 0xA7 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getCadence", 1,  cmdData, rspDataSize, rspData ) ;
     unsigned short cadence = (rspData[3] << 8) + rspData[2];
@@ -520,7 +520,7 @@ unsigned short Pm3Erg::getCadence()
 unsigned short Pm3Erg::getPaceInSecondsPer500()
 {
     UINT32_T cmdData[]={ 0xA6 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getPace", 1,  cmdData, rspDataSize, rspData ) ;
     unsigned short pace = ((rspData[3] << 8) + rspData[2])/2;
@@ -531,7 +531,7 @@ unsigned short Pm3Erg::getPaceInSecondsPer500()
 unsigned short Pm3Erg::getPower()
 {
     UINT32_T cmdData[]={ 0xb4 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getPower", 1,  cmdData, rspDataSize, rspData ) ;
     unsigned short power = (rspData[3] << 8) + rspData[2];
@@ -542,7 +542,7 @@ unsigned short Pm3Erg::getPower()
 unsigned short Pm3Erg::getHeartRate()
 {
     UINT32_T cmdData[]={ 0xb0 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "getHeartRate", 1,  cmdData, rspDataSize, rspData ) ;
     log("getHeartRate()=%d", rspData[2]);
@@ -564,7 +564,7 @@ void Pm3Erg::getPace( int &paceMinutes, int &paceSecs)
 void Pm3Erg::setMetersGoal(unsigned long int meters)
 {
     UINT32_T cmdData[]={ 0x21, 3, 0, 0, 0  };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     cmdData[2]=meters & 0x00ff;
     cmdData[3]=(meters >> 8) & 0x00ff;
@@ -576,7 +576,7 @@ void Pm3Erg::setProgram(unsigned short int id)
 {
     UINT32_T cmdData[]={ 0x24, 2, 0, 0 };
     cmdData[2]=id;
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "setProgram", 4,  cmdData, rspDataSize, rspData ) ;
 }
@@ -585,7 +585,7 @@ void Pm3Erg::setProgram(unsigned short int id)
 void Pm3Erg::setTimeGoal(int hours, int min, int seconds)
 {
     UINT32_T cmdData[]={ 0x20, 3, 0, 0, 0 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     cmdData[2]=hours;
     cmdData[3]=min;
@@ -600,7 +600,7 @@ void Pm3Erg::setHorizontal(unsigned int meters)
     UINT32_T cmdData[]={ 0x21, 3, 0, 0, 36};
     cmdData[2]=meters & 0xff;
     cmdData[3]=(meters>>8) & 0xff;
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "setHorizontal", 5,  cmdData, rspDataSize, rspData ) ;
 }
@@ -611,7 +611,7 @@ void Pm3Erg::setWork(unsigned short hours, unsigned short minutes, unsigned shor
     cmdData[2]=hours;
     cmdData[3]=minutes;
     cmdData[4]=seconds;
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "setWork", 5,  cmdData, rspDataSize, rspData ) ;
 }
@@ -621,7 +621,7 @@ void Pm3Erg::setPower(unsigned int power)
     UINT32_T cmdData[]={ 0x34, 3, 0, 0, 58};
     cmdData[2]=power & 0xff;
     cmdData[3]=(power>>8) & 0xff;
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "setPower", 5,  cmdData, rspDataSize, rspData ) ;
 }
@@ -800,7 +800,7 @@ void Pm3Erg::reset()
     //cout << "**** Pm3Erg::reset\n";
 
     UINT32_T cmdData[]={ 0x81 };
-    UINT16_T rspDataSize;
+    UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
     doCsafeCommand( "reset", 1,  cmdData, rspDataSize, rspData ) ;
 

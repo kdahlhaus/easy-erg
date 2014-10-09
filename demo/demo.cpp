@@ -67,11 +67,21 @@ int main()
             erg.goInUse();
         } 
 
+        cout << "erg.reset():\n";
         erg.reset();
+
+        cout << "erg.goFinished():\n";
         erg.goFinished();
+
+        cout << "erg.goIdle():\n";
         erg.goIdle();
+
+        cout << "erg.goReady():\n";
         erg.goReady();
+
+        cout << "erg.goInUse():\n";
         erg.goInUse();
+
         cout << "workout type: " << erg.getWorkoutType() << "  " << erg.getWorkoutTypeText() << "\n";
         cout.flush();
 
