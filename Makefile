@@ -1,8 +1,4 @@
-
-#point to location of concept II API
-#should be an environment var
-#CONCEPT2SDK=lib/sdk/PC
-#CONCEPT2SDK=lib/sdk/PC
+# $(CONCEPT2SDK) should point to location of concept 2 SDK
 
 # tools that create gcc libraries from DLL's
 PEXPORTS=pexports
@@ -29,10 +25,6 @@ check_for_sdk:
 	if [ ! -e  "$(CONCEPT2SDK)/PM3DDICP.h" ];  then echo "ERROR: PM3DDICP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
 	if [ ! -e  "$(CONCEPT2SDK)/PM3USBCP.h" ];  then echo "ERROR: PM3USBCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
 	if [ ! -e  "$(CONCEPT2SDK)/PM3CSafeCP.h" ];  then echo "ERROR: PM3CSafeCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-
-check2:
-	#	$(error environment variable 'CONCEPT2SDK' must point to the location of the Concept 2 SDK DLL's and headers)
-	#fi
 
 
 
