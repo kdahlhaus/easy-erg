@@ -25,7 +25,7 @@ PREREQS
 
 Steps
 .....
-1. Extract the concept 2 API libraries to lib/sdk. The DLL's should be in lib/sdk/PC.
+1. Extract the concept 2 SDK and set the environment variable 'CONCEPT2SDK' to point to the directory that contains the DLL's and .h files.  
 2. run "make"
 3. connect a Concept 2 ergometer via USB
 4. cd to build
