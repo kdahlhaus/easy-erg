@@ -17,14 +17,14 @@ all:  check_for_sdk build_dir c2libs demos
 
 .PHONY: check_for_sdk
 check_for_sdk:
-	# check that environment variable is set to the SDK
-	if [ "$(CONCEPT2SDK)" = "" ]; then echo "ERROR: environment variable 'CONCEPT2SDK' must point to the location of the Concept 2 SDK DLL's and headers"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3DDICP.dll" ];  then echo "ERROR: PM3DDICP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3USBCP.dll" ];  then echo "ERROR: PM3USBCP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3CSafeCP.dll" ];  then echo "ERROR: PM3CSafeCP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3DDICP.h" ];  then echo "ERROR: PM3DDICP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3USBCP.h" ];  then echo "ERROR: PM3USBCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
-	if [ ! -e  "$(CONCEPT2SDK)/PM3CSafeCP.h" ];  then echo "ERROR: PM3CSafeCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@ # check that environment variable is set to the SDK
+	@if [ "$(CONCEPT2SDK)" = "" ]; then echo "ERROR: environment variable 'CONCEPT2SDK' must point to the location of the Concept 2 SDK DLL's and headers"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3DDICP.dll" ];  then echo "ERROR: PM3DDICP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3USBCP.dll" ];  then echo "ERROR: PM3USBCP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3CSafeCP.dll" ];  then echo "ERROR: PM3CSafeCP.dll is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3DDICP.h" ];  then echo "ERROR: PM3DDICP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3USBCP.h" ];  then echo "ERROR: PM3USBCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
+	@if [ ! -e  "$(CONCEPT2SDK)/PM3CSafeCP.h" ];  then echo "ERROR: PM3CSafeCP.h is not found in location pointed to by CONCEPT2SDK: $(CONCEPT2SDK)"; false; fi
 
 
 
