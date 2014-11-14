@@ -16,7 +16,7 @@ Should you not wish to use the software under the GPL license, please contact Ke
 Building and running the demo programs
 --------------------------------------
 
-PREREQS
+PREREQUISITES
 .......
 1. version 1.24 of the Concept 2 Software Development Kit
 2. cygwin with g++ 
