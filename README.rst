@@ -39,3 +39,8 @@ The command line would be something like this:
     g++ -mno-cygwin -I../easy_erg/build -I../easy_erg/lib/sdk/PC -L../easy_erg/build  my_app.cpp -lEasyErg -lRPPM3USB -lRPPM3DDI
     
 You also have to copy the DLL's from the demo directory to some directory on the path or where the new program resides.
+
+
+ToDo / Notes
+------------
+* Average watts is calculated by sampling power at a fixed rate independent of the position or timing in the stroke.  We might want to tie it to a position in the stroke.

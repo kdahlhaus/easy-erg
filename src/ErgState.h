@@ -29,6 +29,9 @@ class ErgState
         caloriesPerHour=0;
         metersPerStroke=0;
 
+        averageHeartRateEntireWorkout=0;
+        averageWattsEntireWorkout=0;
+
         workoutState=0;
         workoutIntervalCount=0;
         workoutIntervalType=0;
@@ -53,6 +56,8 @@ class ErgState
     int accumulatedCalories;
     int caloriesPerHour;
     int metersPerStroke;
+    int averageHeartRateEntireWorkout;
+    int averageWattsEntireWorkout;
 
     int workoutState;
     int workoutIntervalCount;

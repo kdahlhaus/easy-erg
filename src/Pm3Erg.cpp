@@ -44,6 +44,8 @@ void ErgValueCache::reset()
     lastDragFactor=0;
     lastAccumulatedCalories=0;
     lastCaloriesPerHour=0;
+    averageHeartRateEntireWorkout.reset();
+    averageWattsEntireWorkout.reset();
 } 
 
 
@@ -53,6 +55,10 @@ unsigned short ErgValueCache::getHeartRate( clock_t now )
     {
         nextHR = now + HR_PERIOD;
         lastHeartRate=erg->getHeartRate();
+        if (lastHeartRate > 3 && lastHeartRate < 300)
+        {
+            averageHeartRateEntireWorkout.add(lastHeartRate);
+        }
     }
     return lastHeartRate;
 } 
@@ -63,6 +69,7 @@ unsigned short ErgValueCache::getPower( clock_t now )
     {
         nextPower = now + POWER_PERIOD;
         lastPower=erg->getPower();
+        averageWattsEntireWorkout.add(lastPower);
     }
     return lastPower;
 }
@@ -725,6 +732,8 @@ void Pm3Erg::updateState( ErgState *state)
     state->dragFactor = cache.getDragFactor(now);
     state->accumulatedCalories = cache.getAccumulatedCalories(now);
     state->caloriesPerHour = cache.getCaloriesPerHour(now);
+    state->averageHeartRateEntireWorkout = cache.getAverageHeartRateEntireWorkout();
+    state->averageWattsEntireWorkout = cache.getAverageWattsEntireWorkout();
 
 
 

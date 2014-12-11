@@ -4,10 +4,10 @@
 #include <ctime>
 #define NUM_TIMES 50
 
+#include "RunningAverage.h"
 #include "CIIHeaders.h"
 #include "ErgState.h"
 #include "SlideRatio.h"
-
 #define PM3_BUFFER_SIZE 50
 
 #include "ErgNet.h"
@@ -31,6 +31,9 @@
 
 class Pm3Erg;
 
+
+
+
 class ErgValueCache
 {
     private:
@@ -38,10 +41,12 @@ class ErgValueCache
 
 
         unsigned short lastHeartRate;
+        RunningAverage<unsigned short, unsigned long> averageHeartRateEntireWorkout;
         clock_t nextHR;
         static const clock_t HR_PERIOD = CLOCKS_PER_SEC*1;
 
         unsigned short lastPower;
+        RunningAverage<unsigned short, unsigned long> averageWattsEntireWorkout;
         clock_t nextPower;
         static const clock_t POWER_PERIOD = CLOCKS_PER_SEC*0.52;
 
@@ -74,12 +79,16 @@ class ErgValueCache
         void reset();
 
         unsigned short getHeartRate( clock_t now );
+        unsigned short getAverageHeartRateEntireWorkout() { return averageHeartRateEntireWorkout.aAverage(); }
         unsigned short getPower( clock_t now );
+        unsigned short getAverageWattsEntireWorkout() { return averageWattsEntireWorkout.aAverage(); }
         unsigned short getCadence( clock_t now );
         unsigned short getPaceInSecondsPer500( clock_t now );
         unsigned short getDragFactor( clock_t now );
         int getAccumulatedCalories( clock_t now );
         int getCaloriesPerHour(clock_t now) { return lastCaloriesPerHour; }
+
+
 
 
 };
