@@ -6,3 +6,8 @@ demo/*.exe
 demo/RPPM3*.DLL
 demo/RP*.ini
 demo/PM3*CP.DLL
+test/*.o
+test/*.exe
+test/RPPM3*.DLL
+test/RP*.ini
+test/PM3*CP.DLL 
