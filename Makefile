@@ -52,7 +52,7 @@ src/%.o: src/%.cpp
  
 
 
-demos: c2libs demo/demo.exe demo/demoIntervals.exe demo/demoState.exe
+demos: c2libs demo/demoDiscoverErgs.exe demo/demo.exe demo/demoIntervals.exe demo/demoState.exe
 	@echo demo executables are in demo/
 
 demo/%.exe: demo/%.o build/libEasyErg.a
