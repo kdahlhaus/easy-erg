@@ -4,7 +4,7 @@ Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
 Overview
 --------
-This package contains a library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit).  This library runs against the (lastest as of writing) version of the API - the one with documents labeled version 0.14
+This package contains a C++ library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit) easy.  This library runs against the (lastest as of writing) version of the API - the one with documents labeled version 0.14
 
 License
 -------
@@ -28,8 +28,8 @@ Steps
 1. Extract the concept 2 SDK and set the environment variable 'CONCEPT2SDK' to point to the directory that contains the DLL's and .h files.  
 2. run "make"
 3. connect a Concept 2 ergometer via USB
-4. cd to build
-5. demo.exe
+4. cd to demo
+5. run demo.exe or any of the other demonstration files there.
 
 
 Runnng the Tests
