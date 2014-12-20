@@ -6,16 +6,17 @@ Overview
 --------
 This package contains a C++ library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit) easy.  This library runs against the (lastest as of writing) version of the API - the one with documents labeled version 0.14
 
-    ErgNet net = ErgNet();
-    int numErgs = net.discoverErgs();
-    Pm3Erg erg = Pm3Erg(0); // could actually be a PM3, PM4, or PM5
-    ErgState state;
-    while (1)
-    {
-        erg.updateState(&state);
-        cout << "power: " << state.watts << " (watts)  " << "numStrokes: " << state.numStrokesIn << "  meters/stroke: " << state.metersPerStroke << "\n"; 
-    }      
-
+```C++
+ErgNet net = ErgNet();
+int numErgs = net.discoverErgs();
+Pm3Erg erg = Pm3Erg(0); // could actually be a PM3, PM4, or PM5
+ErgState state;
+while (1)
+{
+    erg.updateState(&state);
+    cout << "power: " << state.watts << " (watts)  " << "numStrokes: " << state.numStrokesIn << "  meters/stroke: " << state.metersPerStroke << "\n"; 
+}      
+```
 
 License
 -------
