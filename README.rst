@@ -13,7 +13,10 @@ This package contains a C++ library and demonstration files that make working wi
     while (1)
     {
         erg.updateState(&state);
-        cout << "power: " << state.watts << " (watts)  " << "numStrokes: " << state.numStrokesIn << "  meters/stroke: " << state.metersPerStroke << "\n"; 
+        cout << "power: " << state.watts << " (watts)  "
+             << "numStrokes: " << state.numStrokesIn 
+             << "  meters/stroke: " << state.metersPerStroke
+             << "\n"; 
     }      
 
 License
