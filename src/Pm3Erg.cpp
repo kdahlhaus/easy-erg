@@ -1,12 +1,3 @@
-/*
-
-note: make sure that ergnet is set for ergtype of this erg before every call into the dll.
-the check is very fast.  see top line of doCsafeCommand
-
-*/
-
-
-
 #include "Pm3Erg.h"
 #include "CIIHeaders.h"
 
@@ -198,7 +189,6 @@ void  Pm3Erg::doCsafeCommand( const char *memo, UINT16_T cmdSize, UINT32_T *cmdD
     }
 #endif
 #endif
-    ergNet.setForErgType(ergType);
     ERRCODE_T errorCode;
     errorCode = csafe.tkcmdsetCSAFE_command( unitAddress, cmdSize, cmdData, &rspDataSize, rspData);
     if (errorCode)
@@ -393,7 +383,6 @@ unsigned short Pm3Erg::getDragFactor()
 
 const char *Pm3Erg::getFirmwareVersion()
 {
-    ergNet.setForErgType(ergType);
     ERRCODE_T errorCode;
     errorCode = tkcmdsetDDI_fw_version( unitAddress, (INT8_T *)verPtr, PM3_BUFFER_SIZE);
     if (errorCode)
@@ -405,7 +394,6 @@ const char *Pm3Erg::getFirmwareVersion()
 
 const char *Pm3Erg::getSerialNumber()
 {
-    ergNet.setForErgType(ergType);
     ERRCODE_T errorCode;
     errorCode = tkcmdsetDDI_serial_number( unitAddress, (INT8_T *)serialNum, PM3_BUFFER_SIZE);
     if (errorCode)

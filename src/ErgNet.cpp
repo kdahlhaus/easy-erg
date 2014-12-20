@@ -4,12 +4,13 @@
 
 
 
-ErgNet *ErgNet::theErgNet = 0;
+
 
 using namespace std;
 
 int isInitialized = 0;
-int discoveredErgs = 0;
+
+
 
 void initializeDlls()
 {
@@ -37,11 +38,8 @@ void initializeDlls()
 }
 
 
-ErgType ErgNet::ergTypeAtAddress[MAX_NUM_ERGS];
-ErgType ErgNet::currentErgType = UNKNOWN_ERGTYPE;
 ERRCODE_T ErgNet::errorCode;
 char ErgNet::errorBuffer[256];
-UINT16_T ErgNet::baseAddress[ERGTYPE_MAX+1];
 
 
 
@@ -53,12 +51,13 @@ ErgNet::ErgNet()
     {
         initializeDlls();
     }
-
-    if (!discoveredErgs)
-    {
-        discoverErgs();
-    }
+    resetErgInfo();
 }
+
+void ErgNet::setErrorCallback( ErgErrorCallbackFunction newCallback )
+{
+    setCIIErrorCallback( newCallback );
+} 
 
 
 ERRCODE_T ErgNet::aErrorCode()
@@ -82,108 +81,80 @@ const char *ErgNet::getErrorText()
     return errorBuffer;
 }
 
+
 ErgType ErgNet::getErgType(int address)
 {
-    if (address<MAX_NUM_ERGS && address>-1)
+    if (address<foundErgs.size())
     {
-        return ergTypeAtAddress[address];
+        return foundErgs[address];
     }
     return UNKNOWN_ERGTYPE;
 }
 
-void ErgNet::resetErgInfo()
-{
-    int i;
-
-    for (int i=0; i<=ERGTYPE_MAX; i++)
-    { baseAddress[i]=0; }
-
-    for (int i=0; i<MAX_NUM_ERGS; i++)
-    {  ergTypeAtAddress[i]=UNKNOWN_ERGTYPE; }
-}
-
-
-int ErgNet::discoverErgsOfType( ErgType ergType )
-//requires base address set but does not update it
-{
-    UINT16_T numPms=0;
-    switch (ergType)
-    {
-        case PM3_ERGTYPE:
-            errorCode = tkcmdsetDDI_discover_pm3s( TKCMDSET_PM3_PRODUCT_NAME2, baseAddress[ergType], &numPms);
-            break;
-        case PM4_ERGTYPE:
-            errorCode = tkcmdsetDDI_discover_pm3s( TKCMDSET_PM4_PRODUCT_NAME, baseAddress[ergType], &numPms);
-            break;
-        default:
-            return 0;
-    }
-    currentErgType = ergType;
-    if (errorCode == -10201) // just means no ergs found
-    {
-        errorCode = 0;
-    }
-    if (errorCode)
-    {
-        return -1;
-    }
-    return numPms;
-}
-    
 
 
 int ErgNet::discoverErgs()
 {
-    int i;
-
     resetErgInfo();
-
-    int numPm3s=0;
-
-    //check for pm3s
-    baseAddress[PM3_ERGTYPE]=0;
-    numPm3s = discoverErgsOfType( PM3_ERGTYPE );
-    if (numPm3s==-1)
-    {
-        return -1;
-    }
-    for (i=0; i<numPm3s & i<MAX_NUM_ERGS; i++)
-    {
-        ergTypeAtAddress[i] = PM3_ERGTYPE;
-    }
-
-    //check for pm4s
-    int numPm4s=0;
-    baseAddress[PM4_ERGTYPE]=numPm3s;
-    numPm4s = discoverErgsOfType( PM4_ERGTYPE );
-    if (numPm4s==-1)
-    {
-        return -1;
-    }
-    for (i=0; i<numPm4s & i<MAX_NUM_ERGS; i++)
-    {
-        ergTypeAtAddress[i] = PM4_ERGTYPE;
-    }
-
-    discoveredErgs = 1;
-
-    return (int)(numPm3s+numPm4s);
+    discoverErgsOfType(PM3_ERGTYPE);
+    discoverErgsOfType(PM4_ERGTYPE);
+    discoverErgsOfType(PM5_ERGTYPE);
+    return foundErgs.size();
 }
 
-void ErgNet::setForErgType(ErgType ergType)
+void ErgNet::resetErgInfo(void)
 {
-    if ( currentErgType != ergType )
-    {
-        discoverErgsOfType(ergType);
-    }
+    currentBaseAddress=0;
+    foundErgs.clear();
 }
 
-void ErgNet::setForErg(int address)
+int ErgNet::discoverErgsOfType(ErgType erg_type_to_look_for)
 {
-    if (currentErgType != getErgType(address))
+    UINT16_T num_found_in_total=0;
+    errorCode = callDDIDiscoverPm3s( (INT8_T *)ergTypeToTkCmdSetProductName(erg_type_to_look_for),  currentBaseAddress, &num_found_in_total);
+    if (errorCode==-10201) // no ergs found
     {
-        setForErgType(getErgType(address));
+        return 0;
     }
+    if (errorCode)
+    {
+        return -1; // some error 
+    }
+
+    //found some ergs
+
+    int num_found_before = foundErgs.size();
+    int num_newly_found_ergs = num_found_in_total-num_found_before;
+
+    //add the newly found ergs
+    for (int i=currentBaseAddress; i<currentBaseAddress+num_newly_found_ergs; i++)
+    {
+        foundErgs[i]=erg_type_to_look_for;
+    }
+
+    //update the currentBaseAddress
+    currentBaseAddress += num_newly_found_ergs;
+
+    return num_newly_found_ergs;
 }
+
+ERRCODE_T ErgNet::callDDIDiscoverPm3s( INT8_T *product_name, UINT16_T starting_address, UINT16_T *num_units)
+{
+    return tkcmdsetDDI_discover_pm3s( product_name, starting_address, num_units );
+}
+
+ 
+
+const char *ErgNet::ergTypeToTkCmdSetProductName(ErgType type)
+{
+    switch (type)
+    {
+        case PM3_ERGTYPE: return TKCMDSET_PM3_PRODUCT_NAME2;
+        case PM4_ERGTYPE: return TKCMDSET_PM4_PRODUCT_NAME;
+        case PM5_ERGTYPE: return TKCMDSET_PM5_PRODUCT_NAME;
+    }
+    return "<error: unknown erg type has n o TKCMDSET name>";
+}
+
 
 

@@ -22,7 +22,10 @@ extern "C"
 #define TKCMDSET_PM4_PRODUCT_NAME "Concept2 Performance Monitor 4 (PM4)" 
 #endif
 
-
+#ifndef TKCMDSET_PM5_PRODUCT_NAME
+#define TKCMDSET_PM5_PRODUCT_NAME "Concept2 Performance Monitor 5 (PM5)" 
+#endif
+ 
 
 extern CSafeDll csafe;
 extern void logCSafeError(ERRCODE_T error, const char *note="");

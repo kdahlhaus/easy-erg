@@ -32,6 +32,14 @@ Steps
 5. demo.exe
 
 
+Runnng the Tests
+----------------
+1. Install GoogleMock (https://code.google.com/p/googlemock/) somewhere.
+2. Point GMOCK_DIR (test/Makefile.test around line 24) and GTEST_DIR (test/Makefile.test around line 20) to the installation.
+3. make all tests
+
+
+
 Using in your own code
 ----------------------
 The command line would be something like this:

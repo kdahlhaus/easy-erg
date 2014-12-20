@@ -25,8 +25,8 @@ int main()
     {
         ErgNet::setErrorCallback( onErgError );
     
-        ErgNet *net = ErgNet::getInstance();
-        cout << "net.discoverErgs() = " << net->discoverErgs() << "\n";
+        ErgNet net = ErgNet();
+        cout << "net.discoverErgs() = " << net.discoverErgs() << "\n";
 
 
 

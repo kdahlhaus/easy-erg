@@ -13,7 +13,7 @@ LIBS        = -lPM3DDICP -lPM3USBCP
 
 BUILD       = build
 
-all:  check_for_sdk build_dir c2libs tests demos 
+all:  check_for_sdk build_dir c2libs build/libEasyErg.a demos 
 
 .PHONY: check_for_sdk
 check_for_sdk:
@@ -30,7 +30,8 @@ check_for_sdk:
 
 .PHONY: clean
 clean:
-	rm -rf $(BUILD) src/*.o demo/*.o  demo/*.DLL demo/*.exe demo/*.def demo/*.a test/*.o  test/*.DLL test/*.exe test/*.def test/*.a 
+	rm -rf $(BUILD) src/*.o demo/*.o  demo/*.DLL demo/*.exe demo/*.def demo/*.a 
+	cd test; make clean
  
 COMMON_OBJECTS = src/Pm3Erg.o src/ErgNet.o src/CSafeDll.o src/CIIHeaders.o src/ErgState.o src/SlideRatio.o
 
@@ -59,6 +60,7 @@ demo/%.exe: demo/%.o build/libEasyErg.a
 
 tests: test/test_running_average.exe
 	@echo test executables are in test/
+	cd test; rm -f test*.exe; make all run
 
 test/%.exe: test/%.o
 	$(CXX)  $(CFLAGS)  $(INCLUDES) $(LDFLAGS) -o $@ $^ $(LIBS) 

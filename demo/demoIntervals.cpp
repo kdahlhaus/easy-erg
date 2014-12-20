@@ -40,9 +40,9 @@ int main()
     {
         ErgNet::setErrorCallback( onErgError );
 
-        ErgNet *net = ErgNet::getInstance();
+        ErgNet net = ErgNet();
         /*
-          cout << "Test Intervals\nnet.discoverErgs() = " << net->discoverErgs() << "\n";
+          cout << "Test Intervals\nnet.discoverErgs() = " << net.discoverErgs() << "\n";
 
         cout << "tkcmdsetDDI_get_dll_version() " << tkcmdsetDDI_get_dll_version() << "\n";
         cout << "tkcmdsetUSB_get_dll_version() " << tkcmdsetUSB_get_dll_version() << "\n";

@@ -34,7 +34,8 @@ int main()
     {
         ErgNet::setErrorCallback( onErgError );
 
-        ErgNet *net = ErgNet::getInstance();
+        ErgNet net = ErgNet();
+        net.discoverErgs();
 
         Pm3Erg erg = Pm3Erg(0);
 

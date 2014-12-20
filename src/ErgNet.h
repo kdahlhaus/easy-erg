@@ -2,6 +2,9 @@
 #define ErgNet_h
 
 #include "CIIHeaders.h"
+#include <map>
+
+using std::map;
 
 
 // erg types
@@ -9,72 +12,54 @@ enum ErgType
 {
     UNKNOWN_ERGTYPE = 0,
     PM3_ERGTYPE = 3,
-    PM4_ERGTYPE = 4
+    PM4_ERGTYPE = 4,
+    PM5_ERGTYPE = 5
 };
-#define ERGTYPE_MAX 4
+#define ERGTYPE_MAX 5
 
-
-#define MAX_NUM_ERGS 64
 
 class ErgNet
 {
 
 protected:
 
-    static ErgNet *theErgNet;
-    static ErgType currentErgType;
-    static ErgType ergTypeAtAddress[MAX_NUM_ERGS];
+    map<int, ErgType> foundErgs;
+    UINT16_T currentBaseAddress;
 
+    // reset what we know about found ergs
+    void resetErgInfo();
 
-    static void resetErgInfo();
-    static int discoverErgsOfType( ErgType );
+    virtual int discoverErgsOfType( ErgType );
 
-    static ERRCODE_T errorCode;
+    static ERRCODE_T errorCode; // error is at the DLL level, so it must be shared across all ErgNet instances
     static char errorBuffer[256];
-    static UINT16_T baseAddress[ERGTYPE_MAX+1];
 
 
+    // virtual to allow mocking with googlemock in tests
+    virtual ERRCODE_T callDDIDiscoverPm3s( INT8_T *product_name, UINT16_T starting_address, UINT16_T *num_units);
+    
 
 public:
 
     ErgNet();
+    virtual ~ErgNet(){};
+
+    const char *ergTypeToTkCmdSetProductName(ErgType type);
 
 
-    static void setForErg(int address);
-    //sets comm link for erg at given addres ( makes the type ok)
-
-            
-    static ErgType getErgType(int address);
     //returns erg type for the given net address
+    ErgType getErgType(int address);
 
-    static int discoverErgs();
     //checks for ergs on the net returns number of ergs found, or -1 if there was an error
+    int discoverErgs();
 
 
-    static void setForErgType(ErgType ergType);
-    //ensures the comm. link is initialized for this erg type
-
-
-    static void setErrorCallback( ErgErrorCallbackFunction newCallback )
-    { setCIIErrorCallback( newCallback ); } 
-
-    static ErgNet *getInstance()
-    {
-        if (!theErgNet)
-        {
-            theErgNet = new ErgNet();
-        }
-        return theErgNet;
-    }
-
-    
-
-    ERRCODE_T aErrorCode();
-
-    const char *getErrorName();
-    const char *getErrorText();
+    // SDK error state is global, so these are all static
+    static void setErrorCallback( ErgErrorCallbackFunction newCallback );
+    static ERRCODE_T aErrorCode();
+    static const char *getErrorName();
+    static const char *getErrorText();
 
 };
-
 
 #endif
