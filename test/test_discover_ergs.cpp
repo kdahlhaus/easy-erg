@@ -47,58 +47,58 @@ TEST( DiscoverErgs, NoErgs )
 
 TEST( DiscoverErgs, NoErgsViaConfigurableErgNet )
 {
-    ConfigurableErgNet oen(0,0,0);
-    ASSERT_EQ(0, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(0,0,0);
+    ASSERT_EQ(0, theErgNet.discoverErgs());
 }
 
 
 TEST( DiscoverErgs, OnePm3 )
 {
-    ConfigurableErgNet oen(1,0,0);
-    ASSERT_EQ(1, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(1,0,0);
+    ASSERT_EQ(1, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, OnePm4 )
 {
-    ConfigurableErgNet oen(0,1,0);
-    ASSERT_EQ(1, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(0,1,0);
+    ASSERT_EQ(1, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, OnePm5 )
 {
-    ConfigurableErgNet oen(0,0,1);
-    ASSERT_EQ(1, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(0,0,1);
+    ASSERT_EQ(1, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, OneOfEach )
 {
-    ConfigurableErgNet oen(1,1,1);
-    ASSERT_EQ(3, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(1,1,1);
+    ASSERT_EQ(3, theErgNet.discoverErgs());
 }
 
 
 TEST( DiscoverErgs, TwoPm3s )
 {
-    ConfigurableErgNet oen(2,0,0);
-    ASSERT_EQ(2, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(2,0,0);
+    ASSERT_EQ(2, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, TwoPm4s )
 {
-    ConfigurableErgNet oen(0,2,0);
-    ASSERT_EQ(2, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(0,2,0);
+    ASSERT_EQ(2, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, TwoPm5s )
 {
-    ConfigurableErgNet oen(0,0,2);
-    ASSERT_EQ(2, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(0,0,2);
+    ASSERT_EQ(2, theErgNet.discoverErgs());
 }
 
 TEST( DiscoverErgs, OnePm3OnePm5 )
 {
-    ConfigurableErgNet oen(1,0,1);
-    ASSERT_EQ(2, oen.discoverErgs());
+    ConfigurableErgNet theErgNet(1,0,1);
+    ASSERT_EQ(2, theErgNet.discoverErgs());
 }
 
 

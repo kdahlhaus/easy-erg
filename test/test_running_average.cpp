@@ -6,7 +6,7 @@
 /* this is a hack to avoid an import error regarding _ctype at runtime */
 short ** _imp___ctype = 0; 
 
-#include "Pm3Erg.h"
+#include "Erg.h"
 
 using namespace std;
 
