@@ -4,7 +4,7 @@ Copyright 2014 by Kevin Dahlhausen (kpd@powertwenty.com)
 
 Overview
 --------
-This package contains a C++ library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit) easy.  This library runs against the (lastest as of writing) version of the API - the one with documents labeled version 0.14::
+This package contains a C++ library and demonstration files that make working with the Concept 2 Software Development Kit (http://www.concept2.com/service/software/software-development-kit) easy.  This library runs against the (latest as of writing) version of the API - the one with documents labeled version 0.14::
 
     ErgNet net = ErgNet();
     int numErgs = net.discoverErgs();
