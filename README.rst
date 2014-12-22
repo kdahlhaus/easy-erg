@@ -8,7 +8,7 @@ This package contains a C++ library and demonstration files that make working wi
 
     ErgNet net = ErgNet();
     int numErgs = net.discoverErgs();
-    Pm3Erg erg = Pm3Erg(0); // could actually be a PM3, PM4, or PM5
+    Erg erg = Erg(0); // could actually be a PM3, PM4, or PM5
     ErgState state;
     while (1)
     {
