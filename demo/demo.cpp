@@ -7,7 +7,7 @@ short ** _imp___ctype = 0;
 
 
 #include "ErgNet.h"
-#include "Pm3Erg.h"
+#include "Erg.h"
 #include "CIIHeaders.h"
 
 using namespace std;
@@ -34,7 +34,7 @@ int main()
         cout << "tkcmdsetUSB_get_dll_version() " << tkcmdsetUSB_get_dll_version() << "\n";
         cout << "tkcmdsetCSAFE_get_dll_version() " << csafe.tkcmdsetCSAFE_get_dll_version() << "\n";
 
-        Pm3Erg erg = Pm3Erg(0);
+        Erg erg = Erg(0);
         cout << "serial #: " << erg.getSerialNumber() << "\n";
         cout << "firmware version: " << erg.getFirmwareVersion() << "\n";
 
@@ -82,7 +82,9 @@ int main()
         cout << "erg.goInUse():\n";
         erg.goInUse();
 
-        cout << "workout type: " << erg.getWorkoutType() << "  " << erg.getWorkoutTypeText() << "\n";
+        cout << "workout type: " << erg.getWorkoutType() 
+            << "  " << erg.getWorkoutTypeText() 
+            << "\n";
         cout.flush();
 
         while (1)

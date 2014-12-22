@@ -7,7 +7,7 @@ short ** _imp___ctype = 0;
 
 
 #include "ErgNet.h"
-#include "Pm3Erg.h"
+#include "Erg.h"
 #include "CIIHeaders.h"
 
 using namespace std;
@@ -37,7 +37,7 @@ int main()
         ErgNet net = ErgNet();
         net.discoverErgs();
 
-        Pm3Erg erg = Pm3Erg(0);
+        Erg erg = Erg(0);
 
         erg.reset();
         erg.goFinished();

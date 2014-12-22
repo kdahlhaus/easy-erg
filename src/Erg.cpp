@@ -1,4 +1,4 @@
-#include "Pm3Erg.h"
+#include "Erg.h"
 #include "CIIHeaders.h"
 
 #include <stdio.h>
@@ -113,7 +113,7 @@ int ErgValueCache::getAccumulatedCalories( clock_t now )
 
 
 
-const char *Pm3Erg::workoutStateText[] = 
+const char *Erg::workoutStateText[] = 
 {
     "Waiting to begin",
     "Workout row", 
@@ -131,13 +131,13 @@ const char *Pm3Erg::workoutStateText[] =
     "Workout rearm"
 }; 
 
-const char *Pm3Erg::intervalTypeText[] = { "Time", "Distance", "Rest" }; // p12
+const char *Erg::intervalTypeText[] = { "Time", "Distance", "Rest" }; // p12
 
 
 
-Pm3Erg::Pm3Erg( int aUnitAddress ) : cache(this)
+Erg::Erg( int aUnitAddress ) : cache(this)
 {
-    //cout << "*** Pm3Erg(" << aUnitAddress << ")\n";
+    //cout << "*** Erg(" << aUnitAddress << ")\n";
     
     initializeDlls();
 
@@ -162,7 +162,7 @@ Pm3Erg::Pm3Erg( int aUnitAddress ) : cache(this)
     resetHasStartedRowing();
 }
 
-void  Pm3Erg::doCsafeCommand( const char *memo, UINT16_T cmdSize, UINT32_T *cmdData, UINT16_T& rspDataSize, UINT32_T *rspData)
+void  Erg::doCsafeCommand( const char *memo, UINT16_T cmdSize, UINT32_T *cmdData, UINT16_T& rspDataSize, UINT32_T *rspData)
 {
     log("doCsafeCommand '%s', %d, ...", memo, cmdSize);
 #if LIMITED
@@ -198,11 +198,11 @@ void  Pm3Erg::doCsafeCommand( const char *memo, UINT16_T cmdSize, UINT32_T *cmdD
     }
 }
 
-unsigned long int Pm3Erg::getTargetTime()
+unsigned long int Erg::getTargetTime()
 {
     return timeGoal;
 }
-unsigned long int Pm3Erg::getTargetDistance()
+unsigned long int Erg::getTargetDistance()
 {
     return metersGoal;
 }
@@ -210,7 +210,7 @@ unsigned long int Pm3Erg::getTargetDistance()
 
 
 
-void Pm3Erg::getTimeIntoThePiece(int *hours, int *mins, int *secs)
+void Erg::getTimeIntoThePiece(int *hours, int *mins, int *secs)
 {
     UINT32_T cmdData[]={ 0xA0 };
     UINT16_T rspDataSize=64;
@@ -222,7 +222,7 @@ void Pm3Erg::getTimeIntoThePiece(int *hours, int *mins, int *secs)
     *secs = rspData[4];
 }
 
-unsigned long int Pm3Erg::getSecondsIntoThePiece()
+unsigned long int Erg::getSecondsIntoThePiece()
 {
     int hours, mins, secs;
     getTimeIntoThePiece( &hours, &mins, &secs);
@@ -230,7 +230,7 @@ unsigned long int Pm3Erg::getSecondsIntoThePiece()
 }
 
 
-unsigned long int Pm3Erg::getDisplayedTime()
+unsigned long int Erg::getDisplayedTime()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -242,7 +242,7 @@ unsigned long int Pm3Erg::getDisplayedTime()
 
 
 
-unsigned long Pm3Erg::getDistanceRowedSoFar()
+unsigned long Erg::getDistanceRowedSoFar()
 {
     // csafe version
     UINT16_T cmdSize=1;
@@ -255,7 +255,7 @@ unsigned long Pm3Erg::getDistanceRowedSoFar()
     return meters;
 }
 
-int Pm3Erg::getAccumulatedCalories()
+int Erg::getAccumulatedCalories()
 {
     UINT16_T cmdSize=1;
     UINT32_T cmdData[]={ 0xa3 };
@@ -268,7 +268,7 @@ int Pm3Erg::getAccumulatedCalories()
 }
 
 
-unsigned long int Pm3Erg::getDisplayedMeters()
+unsigned long int Erg::getDisplayedMeters()
 {
     // pm3 specific
     UINT16_T rspDataSize=64;
@@ -281,7 +281,7 @@ unsigned long int Pm3Erg::getDisplayedMeters()
     return meters;
 }
 
-void Pm3Erg::enableScreenErrorMode( int showErrors )
+void Erg::enableScreenErrorMode( int showErrors )
 {
     log("enableScreenErrorMode(%d)", showErrors);
     Sleep(5000);
@@ -295,7 +295,7 @@ void Pm3Erg::enableScreenErrorMode( int showErrors )
 
 
 
-void Pm3Erg::setSplitDuration(unsigned short timeDistance, unsigned int duration)
+void Erg::setSplitDuration(unsigned short timeDistance, unsigned int duration)
 {
     log("setSplitDuration(%d,%d)", timeDistance, duration);
     UINT16_T rspDataSize=64;
@@ -317,7 +317,7 @@ void Pm3Erg::setSplitDuration(unsigned short timeDistance, unsigned int duration
     doCsafeCommand( "setSplitDuration", 9,  cmd, rspDataSize, rspData ) ;
 }
 
-unsigned short Pm3Erg::getStrokeState()
+unsigned short Erg::getStrokeState()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -327,7 +327,7 @@ unsigned short Pm3Erg::getStrokeState()
     return rspData[rspDataSize-1];
 }
 
-unsigned short Pm3Erg::getWorkoutState()
+unsigned short Erg::getWorkoutState()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -337,7 +337,7 @@ unsigned short Pm3Erg::getWorkoutState()
     return rspData[rspDataSize-1];
 }
 
-unsigned short Pm3Erg::getWorkoutIntervalCount()
+unsigned short Erg::getWorkoutIntervalCount()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -347,7 +347,7 @@ unsigned short Pm3Erg::getWorkoutIntervalCount()
     return rspData[rspDataSize-1];
 }
 
-unsigned short Pm3Erg::getWorkoutIntervalType()
+unsigned short Erg::getWorkoutIntervalType()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -357,7 +357,7 @@ unsigned short Pm3Erg::getWorkoutIntervalType()
     return rspData[rspDataSize-1];
 }
 
-int Pm3Erg::getRestTime()
+int Erg::getRestTime()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -371,7 +371,7 @@ int Pm3Erg::getRestTime()
 
 
 
-unsigned short Pm3Erg::getDragFactor()
+unsigned short Erg::getDragFactor()
 {
     UINT16_T rspDataSize=64;
     UINT32_T rspData[64];
@@ -381,7 +381,7 @@ unsigned short Pm3Erg::getDragFactor()
     return rspData[4];
 }
 
-const char *Pm3Erg::getFirmwareVersion()
+const char *Erg::getFirmwareVersion()
 {
     ERRCODE_T errorCode;
     errorCode = tkcmdsetDDI_fw_version( unitAddress, (INT8_T *)verPtr, PM3_BUFFER_SIZE);
@@ -392,7 +392,7 @@ const char *Pm3Erg::getFirmwareVersion()
     return (const char *)verPtr;
 }
 
-const char *Pm3Erg::getSerialNumber()
+const char *Erg::getSerialNumber()
 {
     ERRCODE_T errorCode;
     errorCode = tkcmdsetDDI_serial_number( unitAddress, (INT8_T *)serialNum, PM3_BUFFER_SIZE);
@@ -405,7 +405,7 @@ const char *Pm3Erg::getSerialNumber()
 
 
 
-void Pm3Erg::goReady()
+void Erg::goReady()
 {
     UINT32_T cmdData[]={ 0x87 };
     UINT16_T rspDataSize=64;
@@ -413,7 +413,7 @@ void Pm3Erg::goReady()
     doCsafeCommand( "goReady", 1,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::goIdle()
+void Erg::goIdle()
 {
     UINT32_T cmdData[]={ 0x82 };
     UINT16_T rspDataSize=64;
@@ -421,7 +421,7 @@ void Pm3Erg::goIdle()
     doCsafeCommand( "goIdle", 1,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::goInUse()
+void Erg::goInUse()
 {
     UINT32_T cmdData[]={ 0x85 };
     UINT16_T rspDataSize=64;
@@ -429,7 +429,7 @@ void Pm3Erg::goInUse()
     doCsafeCommand( "goInUse", 1,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::goFinished()
+void Erg::goFinished()
 {
     UINT32_T cmdData[]={ 0x86 };
     UINT16_T rspDataSize=64;
@@ -441,7 +441,7 @@ void Pm3Erg::goFinished()
 
 
 
-unsigned short Pm3Erg::getWorkoutType()
+unsigned short Erg::getWorkoutType()
 {
     // TODO - fix this when learn how to set a real JUST ROW workout
     if (setJustRow)
@@ -463,10 +463,10 @@ unsigned short Pm3Erg::getWorkoutType()
 
 
 
-const char * Pm3Erg::getWorkoutTypeText()
+const char * Erg::getWorkoutTypeText()
 { return getWorkoutTypeText(getWorkoutType()); }
 
-const char * Pm3Erg::getWorkoutTypeText(unsigned short workoutType)
+const char * Erg::getWorkoutTypeText(unsigned short workoutType)
 {
     if (workoutType < 9)
     {
@@ -487,7 +487,7 @@ const char * Pm3Erg::getWorkoutTypeText(unsigned short workoutType)
     return "Invalid workout type";
 }
 
-const char * Pm3Erg::getStrokeStateText()
+const char * Erg::getStrokeStateText()
 {
     const char *strokeState[] =
     {
@@ -501,7 +501,7 @@ const char * Pm3Erg::getStrokeStateText()
 }
 
 
-unsigned short Pm3Erg::getCadence()
+unsigned short Erg::getCadence()
 {
     UINT32_T cmdData[]={ 0xA7 };
     UINT16_T rspDataSize=64;
@@ -512,7 +512,7 @@ unsigned short Pm3Erg::getCadence()
     return cadence;
 }
 
-unsigned short Pm3Erg::getPaceInSecondsPer500()
+unsigned short Erg::getPaceInSecondsPer500()
 {
     UINT32_T cmdData[]={ 0xA6 };
     UINT16_T rspDataSize=64;
@@ -523,7 +523,7 @@ unsigned short Pm3Erg::getPaceInSecondsPer500()
     return pace;
 }
 
-unsigned short Pm3Erg::getPower()
+unsigned short Erg::getPower()
 {
     UINT32_T cmdData[]={ 0xb4 };
     UINT16_T rspDataSize=64;
@@ -534,7 +534,7 @@ unsigned short Pm3Erg::getPower()
     return power;
 }
 
-unsigned short Pm3Erg::getHeartRate()
+unsigned short Erg::getHeartRate()
 {
     UINT32_T cmdData[]={ 0xb0 };
     UINT16_T rspDataSize=64;
@@ -546,7 +546,7 @@ unsigned short Pm3Erg::getHeartRate()
 
 
 
-void Pm3Erg::getPace( int &paceMinutes, int &paceSecs)
+void Erg::getPace( int &paceMinutes, int &paceSecs)
 {
     unsigned int pace = getPaceInSecondsPer500();
     paceMinutes = pace/60;
@@ -556,7 +556,7 @@ void Pm3Erg::getPace( int &paceMinutes, int &paceSecs)
 
 
 
-void Pm3Erg::setMetersGoal(unsigned long int meters)
+void Erg::setMetersGoal(unsigned long int meters)
 {
     UINT32_T cmdData[]={ 0x21, 3, 0, 0, 0  };
     UINT16_T rspDataSize=64;
@@ -567,7 +567,7 @@ void Pm3Erg::setMetersGoal(unsigned long int meters)
     doCsafeCommand( "setMetersGoal", 5,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::setProgram(unsigned short int id)
+void Erg::setProgram(unsigned short int id)
 {
     UINT32_T cmdData[]={ 0x24, 2, 0, 0 };
     cmdData[2]=id;
@@ -577,7 +577,7 @@ void Pm3Erg::setProgram(unsigned short int id)
 }
 
 
-void Pm3Erg::setTimeGoal(int hours, int min, int seconds)
+void Erg::setTimeGoal(int hours, int min, int seconds)
 {
     UINT32_T cmdData[]={ 0x20, 3, 0, 0, 0 };
     UINT16_T rspDataSize=64;
@@ -589,7 +589,7 @@ void Pm3Erg::setTimeGoal(int hours, int min, int seconds)
 }
 
 
-void Pm3Erg::setHorizontal(unsigned int meters)
+void Erg::setHorizontal(unsigned int meters)
 {
     log("setHorizontal(%d)",meters);
     UINT32_T cmdData[]={ 0x21, 3, 0, 0, 36};
@@ -600,7 +600,7 @@ void Pm3Erg::setHorizontal(unsigned int meters)
     doCsafeCommand( "setHorizontal", 5,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::setWork(unsigned short hours, unsigned short minutes, unsigned short seconds)
+void Erg::setWork(unsigned short hours, unsigned short minutes, unsigned short seconds)
 {
     UINT32_T cmdData[]={ 0x20, 3, 0, 0, 0};
     cmdData[2]=hours;
@@ -611,7 +611,7 @@ void Pm3Erg::setWork(unsigned short hours, unsigned short minutes, unsigned shor
     doCsafeCommand( "setWork", 5,  cmdData, rspDataSize, rspData ) ;
 }
 
-void Pm3Erg::setPower(unsigned int power)
+void Erg::setPower(unsigned int power)
 {
     UINT32_T cmdData[]={ 0x34, 3, 0, 0, 58};
     cmdData[2]=power & 0xff;
@@ -636,10 +636,10 @@ case 8:  // Variable Interval
 
 */
 
-void Pm3Erg::start()
+void Erg::start()
 {
-    //cout << "**** Pm3Erg::start\n";
-    log("Pm3Erg::start");
+    //cout << "**** Erg::start\n";
+    log("Erg::start");
     numStrokesIn=0;
     lastStrokeState=0;
     resetHasStartedRowing(); 
@@ -671,12 +671,12 @@ void Pm3Erg::start()
         break;
     default:
         char msg[200];
-        sprintf( msg, "Erg is set for an unknown workout type: %d (Pm3Erg::start)", workoutType);
+        sprintf( msg, "Erg is set for an unknown workout type: %d (Erg::start)", workoutType);
         logGenericError(-1, msg, "Unknown workout type", msg);
     }
 }
 
-void Pm3Erg::updateState( ErgState *state)
+void Erg::updateState( ErgState *state)
 {
     clock_t now = clock();
 
@@ -782,7 +782,7 @@ void Pm3Erg::updateState( ErgState *state)
         break;
     default:
         char msg[200];
-        sprintf( msg, "Erg is set for an unkown workout type: %d (Pm3Erg::updateState)", workoutType);
+        sprintf( msg, "Erg is set for an unkown workout type: %d (Erg::updateState)", workoutType);
         logGenericError(-1, msg, "Unkown workout type", msg);
 
 
@@ -791,10 +791,10 @@ void Pm3Erg::updateState( ErgState *state)
 }
 
 
-void Pm3Erg::reset()
+void Erg::reset()
 {
 
-    //cout << "**** Pm3Erg::reset\n";
+    //cout << "**** Erg::reset\n";
 
     UINT32_T cmdData[]={ 0x81 };
     UINT16_T rspDataSize=64;
@@ -813,13 +813,13 @@ void Pm3Erg::reset()
 }
 
 
-void Pm3Erg::resetHasStartedRowing()
+void Erg::resetHasStartedRowing()
 {
     _hasStartedRowing = false;
     _hasSeenStrokeState0 = false;
 }
 
-int Pm3Erg::hasStartedRowing()
+int Erg::hasStartedRowing()
 {
     // 'hasStartedRowing' if we pass through stroke state 1 (waiting for wheel to accelerate)
     if (!_hasStartedRowing)
@@ -852,7 +852,7 @@ int Pm3Erg::hasStartedRowing()
     return _hasStartedRowing;
 }
 
-float Pm3Erg::getRequiredFirmwareVersion()
+float Erg::getRequiredFirmwareVersion()
 {
     switch ( getErgType() )
     {
@@ -865,7 +865,7 @@ float Pm3Erg::getRequiredFirmwareVersion()
     }
 }
 
-void Pm3Erg::doFixedDistance(int meters, int split)
+void Erg::doFixedDistance(int meters, int split)
 {
 
     log("doFixedDistance(%d,%d)",meters,split);
@@ -887,7 +887,7 @@ void Pm3Erg::doFixedDistance(int meters, int split)
 }
 
 
-void Pm3Erg::doFixedTime(int hours, int min, int seconds, int split)
+void Erg::doFixedTime(int hours, int min, int seconds, int split)
 {
 
     reset();
@@ -911,7 +911,7 @@ void Pm3Erg::doFixedTime(int hours, int min, int seconds, int split)
 }
 
 
-void Pm3Erg::log(const char *format, ...)
+void Erg::log(const char *format, ...)
 {
     return;
     char buffer[128];
@@ -926,7 +926,7 @@ void Pm3Erg::log(const char *format, ...)
 
 
 /*
-void Pm3Erg::doJustRow(int split)
+void Erg::doJustRow(int split)
 {
 
     reset();
@@ -945,9 +945,9 @@ void Pm3Erg::doJustRow(int split)
 
 
 
-const char *Pm3Erg::getWorkoutStateText() { return getWorkoutStateText(getWorkoutState()); }
+const char *Erg::getWorkoutStateText() { return getWorkoutStateText(getWorkoutState()); }
 
-const char *Pm3Erg::getWorkoutStateText(int workoutState)
+const char *Erg::getWorkoutStateText(int workoutState)
     {
         if (workoutState>-1 && workoutState<14)
         {
@@ -959,10 +959,10 @@ const char *Pm3Erg::getWorkoutStateText(int workoutState)
 
 
 
-const char *Pm3Erg::getWorkoutIntervalTypeText() 
+const char *Erg::getWorkoutIntervalTypeText() 
 { return getWorkoutIntervalTypeText(getWorkoutIntervalType()); }
 
-const char *Pm3Erg::getWorkoutIntervalTypeText(unsigned short intervalType)
+const char *Erg::getWorkoutIntervalTypeText(unsigned short intervalType)
     {
         if (intervalType<3)
         {

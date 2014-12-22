@@ -1,5 +1,5 @@
-#ifndef Pm3Erg_h
-#define Pm3Erg_h
+#ifndef Erg_h
+#define Erg_h
 
 #include <ctime>
 #define NUM_TIMES 50
@@ -29,7 +29,7 @@
 // #define TIME_UPDATESTATE
 //
 
-class Pm3Erg;
+class Erg;
 
 
 
@@ -37,7 +37,7 @@ class Pm3Erg;
 class ErgValueCache
 {
     private:
-        Pm3Erg *erg;
+        Erg *erg;
 
 
         unsigned short lastHeartRate;
@@ -70,7 +70,7 @@ class ErgValueCache
 
 
     public:
-        ErgValueCache(Pm3Erg *theErg) : lastHeartRate(0)
+        ErgValueCache(Erg *theErg) : lastHeartRate(0)
         {
             erg=theErg;
             reset();
@@ -94,7 +94,7 @@ class ErgValueCache
 };
 
 
-class Pm3Erg
+class Erg
 {
     ErgValueCache cache;
     static const char *workoutStateText[];
@@ -137,7 +137,7 @@ public:
 
     
 
-    Pm3Erg( int aUnitAddress);
+    Erg( int aUnitAddress);
 
     inline ErgType getErgType() { return ergType; }
    

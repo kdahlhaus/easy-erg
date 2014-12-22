@@ -4,7 +4,7 @@
 short ** _imp___ctype = 0; 
 
 #include "ErgNet.h"
-#include "Pm3Erg.h"
+#include "Erg.h"
 #include "CIIHeaders.h"
 
 using namespace std;
@@ -31,7 +31,7 @@ int main()
         {
             cout << "\nFor erg on address " << address << ":\n";
     
-            Pm3Erg erg = Pm3Erg(address);
+            Erg erg = Erg(address);
             cout << "   easy-erg detected a PM" << net.getErgType(address) << "\n";
             cout << "   serial #: " << erg.getSerialNumber() << "\n";
             cout << "   firmware version: " << erg.getFirmwareVersion() << "\n";

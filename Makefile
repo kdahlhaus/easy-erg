@@ -33,9 +33,9 @@ clean:
 	rm -rf $(BUILD) src/*.o demo/*.o  demo/*.DLL demo/*.exe demo/*.def demo/*.a 
 	cd test; make clean
  
-COMMON_OBJECTS = src/Pm3Erg.o src/ErgNet.o src/CSafeDll.o src/CIIHeaders.o src/ErgState.o src/SlideRatio.o
+COMMON_OBJECTS = src/Erg.o src/ErgNet.o src/CSafeDll.o src/CIIHeaders.o src/ErgState.o src/SlideRatio.o
 
-src/Pm3Erg.o: src/Pm3Erg.cpp src/RunningAverage.h src/CIIHeaders.h src/ErgState.h src/SlideRatio.h src/ErgNet.h
+src/Erg.o: src/Erg.cpp src/RunningAverage.h src/CIIHeaders.h src/ErgState.h src/SlideRatio.h src/ErgNet.h
 
 lib: build_dir $(BUILD)/libEasyErg.a
 
