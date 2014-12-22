@@ -281,7 +281,15 @@ public:
 
     // begin a new piece, required to initialize workout parameters that are only available before the user starts rowing
     void start(); 
+
+    // update ergState object at given address by pulling data from the 
+    // real ergometer.  Note: this is intentionally a pointer and not a
+    // reference due to the needs of the main client (wrapper for Python)
     void updateState( ErgState *ergState);
+
+    // reset the erg wrapper in preparation for a new workout
+    // this clears things like running averages, cached values, etc, 
+    // but does not not reset the Performance Monitor on the real erg
     void reset();
 
 
