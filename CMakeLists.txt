@@ -7,4 +7,4 @@ include_directories (${C2SDK})
 
 add_subdirectory (src)
 add_subdirectory (demo)
-#add_subdirectory (test)
+add_subdirectory (test)
