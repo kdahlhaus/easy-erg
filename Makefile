@@ -5,10 +5,10 @@ PEXPORTS=pexports
 DLLTOOL=dlltool
 
 
-CFLAGS      =-mno-cygwin
+#CFLAGS      =-mno-cygwin
 SWIGFLAGS	=-strict 0 -c++ -shadow -dhtml
 INCLUDES    = -I$(CONCEPT2SDK) -Isrc
-LDFLAGS     = -L$(CONCEPT2SDK) -Lsrc -L$(BUILD)
+LDFLAGS     = -Lsrc -L$(BUILD)
 LIBS        = -lPM3DDICP -lPM3USBCP 
 
 BUILD       = build

@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 #include <iostream>
+//#include <math.h>       /* pow */ for meters/stroke calcualted when this is enabled
 
 #include "windows.h"
 
@@ -737,6 +738,11 @@ void Erg::updateState( ErgState *state)
         }
     }
     state->metersPerStroke=metersPerStroke;
+
+    // TODO: alternative way to calculate dist/stroke, also when should this be calculated? watts changes greatly over course of the stroke
+    // D (meters) = 60/R x (W/2.8)^(1/3) (from http://www.c2forum.com/viewtopic.php?f=15&t=55159 )
+    // metersPerStroke_calculated = 60.0/(state->cadence) * pow(((state->watts)/2.8), (1.0/3.0))
+
 
     state->workoutType  = workoutType;
 

@@ -12,9 +12,10 @@ short ** _imp___ctype = 0;
 
 using namespace std;
 
+
 void onErgError( int errorCode, char *note, char *errorName, char *errorText)
 {
-    printf("onErgError called:\nerrorcode: %d\nnote: %s\nerror name: %s\nerror text: %s\n", errorCode, note, errorName, errorText);
+    cerr << "onErgError called:\nerrorcode:" << errorCode << "\nnote: " << note << "\nerror name: " << errorName << "\nerror text: " << errorText << "\n";
     exit(1);
 }
 
@@ -98,7 +99,7 @@ int main()
     }
     catch (int error)
     {
-        printf("caught error:%d", error);
+        cerr << "caught error: " << error;
         return 1;
     }
 
