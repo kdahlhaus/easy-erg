@@ -38,20 +38,19 @@ int main()
 {
     try
     {
+        cout << "demoIntervals\n\n";
         ErgNet::setErrorCallback( onErgError );
 
         ErgNet net = ErgNet();
-        /*
-          cout << "Test Intervals\nnet.discoverErgs() = " << net.discoverErgs() << "\n";
-
+        cout << "Test Intervals\nnet.discoverErgs() = " << net.discoverErgs() << "\n";
+        
         cout << "tkcmdsetDDI_get_dll_version() " << tkcmdsetDDI_get_dll_version() << "\n";
         cout << "tkcmdsetUSB_get_dll_version() " << tkcmdsetUSB_get_dll_version() << "\n";
         cout << "tkcmdsetCSAFE_get_dll_version() " << csafe.tkcmdsetCSAFE_get_dll_version() << "\n";
-        */
 
         Erg erg = Erg(0);
-        //cout << "serial #: " << erg.getSerialNumber() << "\n";
-        //cout << "firmware version: " << erg.getFirmwareVersion() << "\n";
+        cout << "serial #: " << erg.getSerialNumber() << "\n";
+        cout << "firmware version: " << erg.getFirmwareVersion() << "\n";
 
 
 
@@ -79,6 +78,8 @@ int main()
         cout << "getDisplayedMeters";
         cout << "\n";
 
+
+
         while (1)
         {
             cout << erg.getWorkoutTypeText() << ",";
@@ -97,6 +98,7 @@ int main()
             cout << erg.getDisplayedMeters() << "";
             cout << "\n";
             sleep(1000);
+            //exit(1);
         }
     }
     catch (int error)
