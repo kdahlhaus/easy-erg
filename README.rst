@@ -22,6 +22,7 @@ This package contains a C++ library and demonstration files that make working wi
 License
 -------
 This software is licensed under the Mozilla Public License V 2.0.   See the file 'LICENSE.txt' for full details, but my intent is that:
+
 * You can use and modify this library freely in private, open-source, and closed-source commercial software
 * You disclose any changes you make to this libary (pull-requests are ideal).
 * You do not need release the source to your own software that uses this library.
