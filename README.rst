@@ -14,16 +14,19 @@ This package contains a C++ library and demonstration files that make working wi
     {
         erg.updateState(&state);
         cout << "power: " << state.watts << " (watts)  "
-             << "numStrokes: " << state.numStrokesIn 
+             << "numStrokes: " << state.numStrokesIn
              << "  meters/stroke: " << state.metersPerStroke
-             << "\n"; 
-    }      
+             << "\n";
+    }
 
 License
 -------
-This software is licensed under the GNU GPL.  Please see the file 'LICENSE' for details.  Note that this license requires any software using this library to make source code available. 
+This software is licensed under the Mozilla Public License V 2.0.   See the file 'LICENSE.txt' for full details, but my intent is that:
+* You can use and modify this library freely in private, open-source, and closed-source commercial software
+* You disclose any changes you make to this libary (pull-requests are ideal).
+* You do not need release the source to your own software that uses this library.
 
-Should you not wish to use the software under the GPL license, please contact Kevin Dahlhausen (kpd@powertwenty.com) to discuss alternative licensing.
+Should you not wish to use the software under the Mozilla Public License, please contact Kevin Dahlhausen (kpd@powertwenty.com) to discuss alternative licensing.
 
 
 Building and running the demo programs
@@ -32,13 +35,13 @@ Building and running the demo programs
 PREREQS:
 .......
 1. version 1.24 of the Concept 2 Software Development Kit
-2. cygwin with g++ 
+2. cygwin with g++
 3. dlltool installed
 4. pexports installed
 
 Steps
 .....
-1. Extract the concept 2 SDK and set the environment variable 'CONCEPT2SDK' to point to the directory that contains the DLL's and .h files.  
+1. Extract the concept 2 SDK and set the environment variable 'CONCEPT2SDK' to point to the directory that contains the DLL's and .h files.
 2. run "make"
 3. connect a Concept 2 ergometer via USB
 4. cd to demo
@@ -58,7 +61,7 @@ Using in your own code
 The command line would be something like this:
 
     g++ -mno-cygwin -I../easy_erg/build -I../easy_erg/lib/sdk/PC -L../easy_erg/build  my_app.cpp -lEasyErg -lRPPM3USB -lRPPM3DDI
-    
+
 You also have to copy the DLL's from the demo directory to some directory on the path or where the new program resides.
 
 
