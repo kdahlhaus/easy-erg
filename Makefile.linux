@@ -1,0 +1,68 @@
+# in shell export <var name>=<value> for each of the following:
+# $(C2API) should point to C2API build dir
+# $(HIDAPI_LIBDIR) should point to
+
+
+CFLAGS      = -DLINUX -fPIC
+INCLUDES    = -I$(C2API) -Isrc
+LDFLAGS     = -Lsrc -L$(BUILD) -L$(HIDAPI_LIBDIR)
+LIBS        = -lhidapi-libusb
+
+BUILD       = build
+
+# the .o files that must be linked to from C2API
+C2API_OBJS=$(C2API)/c2api.o $(C2api)/csafe.o $(C2API)/csafe_util.o $(C2API)/debug.o $(C2API)/utils.o
+
+
+all:  check_for_c2api build_dir build/libEasyErg.a demos
+
+
+.PHONY: check_for_c2api
+check_for_c2api:
+	@ # check that environment variable is set to the SDK
+	@if [ "$(C2API)" = "" ]; then echo "ERROR: environment variable 'C2API' must point to the location of the c2api directory"; false; fi
+	@if [ ! -e  "$(C2API)/c2api.o" ];  then echo "ERROR: It appears that the C2API in $(C2API) has not been built - missing $(C2API)/c2api.o "; false; fi
+
+
+.PHONY: clean
+clean:
+	rm -rf $(BUILD) src/*.o demo/*.o  demo/*.DLL demo/*.exe demo/*.def demo/*.a
+	cd test; make clean
+
+COMMON_OBJECTS = src/Erg.o src/ErgNet.o src/ErgState.o src/SlideRatio.o src/CIIHeaders.o
+
+src/Erg.o: src/Erg.cpp src/RunningAverage.h  src/ErgState.h src/SlideRatio.h src/ErgNet.h src/CIIHeaders.h
+
+lib: build_dir $(BUILD)/libEasyErg.a
+
+build/libEasyErg.a: $(COMMON_OBJECTS)
+	$(AR) rcs $@ $^
+	cp src/*.h $(BUILD)
+
+src/%.o: src/%.cpp
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+%.o: %.cpp
+	$(CXX) $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+
+
+demos:
+	g++ -DLINUX -Ibuild -Lbuild demo/demoDiscoverErgs.cpp -lhidapi-libusb -lEasyErg
+
+ddemos: demo/demoDiscoverErgs.exe demo/demo.exe demo/demoIntervals.exe demo/demoState.exe
+	@echo demo executables are in demo/
+
+demo/%.exe: demo/%.o build/libEasyErg.a
+	$(CXX)  $(CFLAGS)  $(INCLUDES) $(LDFLAGS) -o $@ $^ $(LIBS) -lEasyErg
+
+tests: test/test_running_average.exe
+	@echo test executables are in test/
+	cd test; rm -f test*.exe; make all run
+
+test/%.exe: test/%.o
+	$(CXX)  $(CFLAGS)  $(INCLUDES) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+
+build_dir:
+	@mkdir -p $(BUILD)
